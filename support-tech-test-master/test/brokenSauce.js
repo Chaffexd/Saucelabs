@@ -1,4 +1,4 @@
-const {Builder, By, Key, until} = require('selenium-webdriver')
+const {Builder, By, Key, until, Actions} = require('selenium-webdriver')
 const utils = require('./utils')
 
 const SAUCE_USERNAME = process.env.SAUCE_USERNAME;
@@ -42,6 +42,14 @@ describe('Broken Sauce', function () {
 
         let page = await driver.findElement(By.partialLinkText("sauce"));
         await page.click();
+
+        // I did find there is a mouse over function called moveToElement(location).click() <- as example, this works though
+        let resource = await driver.findElement(By.linkText("Resources"))
+        resource.click();
+   
+
+        let documentation = await driver.findElement(By.partialLinkText("Documentation")); // could also use xpath here
+        documentation.click();
 
         await driver.quit();
         } catch (err) {
